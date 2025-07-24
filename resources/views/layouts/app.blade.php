@@ -32,11 +32,6 @@
 									Logout</a>
 						</li>
 					@endauth
-					@guest
-						<li class="nav-item">
-							<a class="nav-link" href="{{ route('login') }}">Login</a>
-						</li>
-					@endguest
 				</ul>
 			</div>
 		</div>
