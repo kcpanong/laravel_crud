@@ -13,6 +13,7 @@ class ProductCrud extends Component
 
     public $productId;
     public $code, $name, $quantity, $price, $description, $image, $oldImage;
+    public $showingProduct = null;
     public $isEditMode = false;
     public $showForm = false;
 
@@ -29,12 +30,13 @@ class ProductCrud extends Component
     {
         return view('livewire.product-crud-ui', [
             'products' => Product::latest()->paginate(4),
+            'showingProduct' => $this->showingProduct,
         ]);
     }
 
     public function resetForm()
     {
-        $this->reset(['productId', 'code', 'name', 'quantity', 'price', 'description', 'image', 'oldImage']);
+        $this->reset(['productId', 'code', 'name', 'quantity', 'price', 'description', 'image', 'oldImage', 'showingProduct']);
         $this->isEditMode = false;
         $this->showForm = false;
         $this->resetValidation();
@@ -66,6 +68,21 @@ class ProductCrud extends Component
 
         session()->flash('message', 'Product added successfully.');
         $this->resetForm();
+    }
+
+    public function show($id)
+    {
+        $this->resetForm();
+        $product = Product::findOrFail($id);
+
+        $this->showingProduct = [
+            'code' => $product->code,
+            'name' => $product->name,
+            'quantity' => $product->quantity,
+            'price' => $product->price,
+            'description' => $product->description,
+            'image' => $product->image,
+        ];
     }
 
     public function edit($id)
