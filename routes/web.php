@@ -26,4 +26,8 @@ Auth::routes(['register' => false, 'login' => false]);
 Route::middleware('auth')->group(function () {
     Route::get('/products', fn () => view('livewire.product-crud'))->name('products.index');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/logout', function () {
+        Auth::logout();
+        return redirect()->route('auth');
+    })->name('logout');
 });

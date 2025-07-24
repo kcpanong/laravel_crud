@@ -28,12 +28,8 @@
 				<ul class="navbar-nav ms-auto">
 					@auth
 						<li class="nav-item">
-							<form method="POST" action="{{ route('logout') }}">
-								@csrf
-								<button type="submit" class="btn btn-outline-light btn-sm">
-									Logout
-								</button>
-							</form>
+								<a href="/logout" class="btn btn-outline-light btn-sm" wire:navigate>
+									Logout</a>
 						</li>
 					@endauth
 					@guest

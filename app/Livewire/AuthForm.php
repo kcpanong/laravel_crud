@@ -24,7 +24,7 @@ class AuthForm extends Component
         ];
     }
 
-    public function toggleMode()
+    public function toggleForm()
     {
         $this->resetValidation();
         $this->isLogin = !$this->isLogin;
