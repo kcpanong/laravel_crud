@@ -37,7 +37,7 @@ class AuthForm extends Component
         if ($this->isLogin) {
             if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
                 session()->regenerate();
-                return redirect()->route('products.index');
+                return $this->redirect('/products', navigate: true);
             }
 
             $this->addError('email', 'Invalid credentials.');
@@ -49,7 +49,7 @@ class AuthForm extends Component
             ]);
 
             Auth::login($user, true);
-            return redirect()->route('products.index');
+            return $this->redirect('/products', navigate: true);
         }
     }
 
